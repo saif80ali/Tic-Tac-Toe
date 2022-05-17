@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Lobster&display=swap" rel="stylesheet">
+    <title>Tic Tac Toe</title>
+</head>
+
+<body>
+    <header>
+        <h2 id="page-title">Tic Tac Toe</h2>
+    </header>
+    <div class="gameModes">
+        <button id="plavermode" class="mode-button" onclick="askplayername(true)">Player VS Player</button>
+        <button id="computermode" class="mode-button" onclick="askplayername(false)">Player VS Computer</button>
+    </div>
+    <div class="container">
+        <div id="tic-tac-toe-conatiner">
+            <div class="box">
+                <div class="row">
+                    <div id="box1" class="col-4 boxes border-top-0 border-start-0"> <span class="boxtext">X</span></div>
+                    <div class="col-4 boxes border-top-0"> <span class="boxtext">X</span></div>
+                    <div class="col-4 boxes border-top-0 border-end-0"> <span class="boxtext">O</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 boxes border-start-0"> <span class="boxtext">X</span></div>
+                    <div class="col-4 boxes"> <span class="boxtext">O</span></div>
+                    <div class="col-4 boxes border-end-0"> <span class="boxtext">O</span></div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-4 boxes border-start-0 border-bottom-0"> <span class="boxtext">X</span></div>
+                    <div class="col-4 boxes border-bottom-0"> <span class="boxtext">O</span></div>
+                    <div class="col-4 boxes border-end-0 border-bottom-0"> <span class="boxtext">X</span></div>
+                </div>
+            </div>
+            
+            <div class="turnfor mx-5">
+                <h5>Turn For</h5>
+                <div id="x-turn" class="whosTurn turn-border">X - <span id="player1Name"></span></div>
+                <div id="o-turn" class="whosTurn">O - <span id="player2Name"></span></div>
+            </div>
+        </div>
+        <div id="declaringResults" class="text-center">
+            <h3 id="declareWinnerName" class="text-capitalize text-center"></h3>
+            <img id="celebrationImage" src="" style="height: 300px;width: 300px;">
+            <button class="btn btn-info text-light" onclick="readyToPlay()"> Play Again</button>
+        </div>
+        <div id="stats">
+
+            <h3 class="text-center">Stats</h3>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th id="player1" class="playername" scope="col"></th>
+                    <th id="player2" class="playername" scope="col"></th>
+                  </tr>
+                </thead>
+                <p id="norecords">No records found</p>
+                <tbody id="tbody" class="d-none">
+                </tbody>
+                <tr></tr>
+                    <th id="total1"></th>
+                    <th id="total2"></th>
+              </table>
+        </div>
+    </div>
+    <!-- <img src="./assets/winner.gif"> -->
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+<script src="script.js"></script>
+
+</html>

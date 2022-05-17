@@ -1,0 +1,93 @@
+header {
+    height: 57px;
+    background: rgb(139,213,245);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#page-title{
+    font-family: 'Lobster',cursive;
+}
+.gameModes {
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+#tic-tac-toe-conatiner {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap-reverse;
+}
+div#stats {
+    margin-top: 12px;
+}
+
+.mode-button {
+    outline: none;
+    margin: 0 7px;
+    border-radius: 13px;
+    cursor: pointer;
+    border: none;
+    padding: 8px;
+    background-color: rgb(139,213,245);
+    color: white;
+    font-weight: bold;
+}
+.mode-button:hover{
+    border-bottom: 4px solid rgb(139,213,245);
+    background-color: white;
+    color: rgb(139,213,245);
+
+}
+
+.playername{
+    text-transform: capitalize;
+}
+.box {
+    width: 355px;
+}
+.boxes {
+    border: 3px solid rgb(78 177 220);;
+    height: 112px;
+    width: 112px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.boxes:hover{
+    background: rgb(214 232 239);
+    cursor: grab;
+}
+.boxtext{
+    font-size: 4rem;
+    font-family: 'Josefin Sans', sans-serif;
+}
+.turnfor {
+    align-self: center;
+    margin-bottom: 14px;
+    text-align: center;
+}
+.whosTurn {
+    display: inline-block;
+    padding: 0px 8px;
+    border-radius: 6px;
+    text-align: center;
+    margin: 4px;
+    font-weight: bold;
+}
+.turn-border{
+    border-bottom: 3.5px solid rgb(55 165 213);
+}
+#declaringResults{
+    display: none;
+}
