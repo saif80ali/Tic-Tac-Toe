@@ -6,6 +6,10 @@ header {
     align-items: center;
     justify-content: center;
 }
+#todayDate{
+    position: fixed;
+    right: 8px;
+}
 #page-title{
     font-family: 'Lobster',cursive;
 }
@@ -14,7 +18,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
+    height: 68px;
 }
 .container {
     display: flex;
@@ -91,3 +95,12 @@ div#stats {
 #declaringResults{
     display: none;
 }
+#scorecard {
+    display: flex;
+    align-items: center;
+}
+@media screen and (max-width: 990px) {
+    #scorecard{
+        align-items: flex-start;
+    }
+  }
