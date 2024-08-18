@@ -5,10 +5,23 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    @media screen and (max-width: 767px){
+        flex-direction: column;
+        height: auto;
+    }
+}
+
+#game-box,#player1-info,#player2-info{
+    display: none;
 }
 #todayDate{
-    position: fixed;
-    right: 8px;
+    @media screen and (min-width: 768px){
+        position: absolute;
+        right: 8px;
+    }
+}
+#draw{
+    background-color: #22e19a;
 }
 #page-title{
     font-family: 'Lobster',cursive;
@@ -30,6 +43,7 @@ header {
     display: flex;
     justify-content: center;
     flex-wrap: wrap-reverse;
+    max-width: 500px;
 }
 div#stats {
     margin-top: 12px;
@@ -98,6 +112,25 @@ div#stats {
 #scorecard {
     display: flex;
     align-items: center;
+    flex-direction: column;
+}
+.bar-chart {
+    display: flex;
+    padding-left: 0;
+}
+.bar-chart li {
+    width: 88px;
+    list-style: none;
+    margin: 2px 4px;
+}
+.graph {
+    height: 200px;
+}
+.each-bar{
+    align-self: flex-end;
+    height: 0%;
+    background: #ff3400;
+    color: white;
 }
 @media screen and (max-width: 990px) {
     #scorecard{

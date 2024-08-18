@@ -1,8 +1,15 @@
 var player1 = "";
 var player2 = "";
+var player1_symbol = "";
+var player2_symbol = "";
+var score1 = 0;
+var score2 = 0;
+var multiPlayer = false;
 var numberOfTimesClicked = 0;
 var mode = "";
-var turn = "X";
+var gamePlayedCount = 0;
+var allowedSymbols = ["!", "@", "X", "O", "&", "%", "#", "$"];
+var turn = "";
 var draw = 0;
 var startTime = 0;
 var endTime = 0;
@@ -38,26 +45,43 @@ function ComputersTurn(min = 0, max = 8) {
 function showWinnerModal(msg, imagepath) {
   gameOver.play();
   numberOfTimesClicked = 0;
+  gamePlayedCount++;
   setTimeout(() => {
     document.getElementById("celebrationImage").src = imagepath;
     document.getElementById("tic-tac-toe-conatiner").style.display = "none";
     document.getElementById("declaringResults").style.display = "block";
     document.getElementById("declareWinnerName").innerText = msg;
-
+    if (score1 >= 6 || score2 >= 6) {
+      if (score1 > score2) {
+        alert(player1 + "is the Winner");
+      } else {
+        alert(player2 + "is the Winner");
+      }
+      location.reload();
+    } else if (gamePlayedCount >= 10) {
+      if (score1 > score2) {
+        alert(player1 + "is the Winner");
+      } else if (score1 < score2) {
+        alert(player2 + "is the Winner");
+      } else {
+        alert("Its a tie between " + player1 + " and " + player2);
+      }
+      location.reload();
+    }
     resetBoxes();
   }, 200);
 }
 
 // this function updates all the scores of the tables available on the page it will be called inside checkwin() after a winner is found
 function updateScores(player1Points, player2Points, timeTaken1) {
-  // it taked 3 parameters points for both players (1/0) and the time at which the game ended 
+  // it taked 3 parameters points for both players (1/0) and the time at which the game ended
 
   let timeTaken = timeTaken1 - startTime;
   timeTaken /= 1000;
   seconds = Math.round(timeTaken);
   // total time is calculated in terms of seconds and is rounded of
-  var score1 = 0;
-  var score2 = 0;
+  score1 = 0;
+  score2 = 0;
   let mytbody = document.getElementById("mytbody");
   var row = mytbody.insertRow();
   var cell1 = row.insertCell(0);
@@ -89,8 +113,11 @@ function updateScores(player1Points, player2Points, timeTaken1) {
   }
   // taking the sum of each row in the scorecard so that it could be displayed in the points table
   document.getElementById("total1").innerHTML = score1;
+  document.getElementById("total1").style.height = (score1 / 10) * 100 + "%";
   document.getElementById("total2").innerHTML = score2;
+  document.getElementById("total2").style.height = (score2 / 10) * 100 + "%";
   document.getElementById("draw").innerHTML = draw;
+  document.getElementById("draw").style.height = (draw / 10) * 100 + "%";
   document.getElementById("toalgames").innerHTML = draw + score1 + score2;
 }
 
@@ -98,7 +125,7 @@ function updateScores(player1Points, player2Points, timeTaken1) {
 function readyToPlay() {
   isgameOver = false;
   startTime = new Date();
-  turn = "X";
+  turn = player1_symbol;
   numberOfTimesClicked = 0;
   document.getElementById("x-turn").classList.add("turn-border");
   document.getElementById("o-turn").classList.remove("turn-border");
@@ -138,7 +165,7 @@ function checkwin() {
       boxtext[e[0]].innerText !== ""
     ) {
       let winner = boxtext[e[0]].innerText;
-      if (winner == "X") {
+      if (winner == player1_symbol) {
         winner = player1;
         endTime = new Date();
         // the time of the game stops here
@@ -168,8 +195,8 @@ function checkwin() {
 }
 // this will be called after every click and change the turn from X to O and O to X
 function changeTurn() {
-  tempTurn = turn === "X" ? "O" : "X";
-  if (tempTurn === "X") {
+  tempTurn = turn === player1_symbol ? player2_symbol : player1_symbol;
+  if (tempTurn === player1_symbol) {
     document.getElementById("x-turn").classList.add("turn-border");
     document.getElementById("o-turn").classList.remove("turn-border");
   } else {
@@ -178,17 +205,52 @@ function changeTurn() {
   }
   return tempTurn;
 }
+// it will be tale player1 name and player2 name
+function askGameType(gameType) {
+  $("#player1-info").css("display", "block");
+  $(".gameModes").css("display", "none");
+  multiPlayer = gameType;
+}
+
+// take player1 details
+function player1Details(e) {
+  e.preventDefault();
+  player1 = $("#player1-name").val();
+  player1_symbol = $("#player1-icon").val();
+  $("#player1-info").css("display", "none");
+  allowedSymbols = allowedSymbols.filter((item) => {
+    return player1_symbol != item;
+  });
+  if (multiPlayer) {
+    $("#player2-info").css("display", "block");
+    allowedSymbols.forEach((item) => {
+      $("#player2-icon").append(`<option value="${item}">${item}</option>`);
+    });
+  } else {
+    startTheGame();
+  }
+}
+// take player2 details
+function player2Details(e) {
+  e.preventDefault();
+  player2 = $("#player2-name").val();
+  player2_symbol = $("#player2-icon").val();
+  $("#player2-info").css("display", "none");
+  startTheGame();
+}
 
 // it will be called when user clicks on any game mode button
-function askplayername(secondplayer) {
-  player1 = prompt("Enter name for Player1", "Player1");
-  if (secondplayer) {
-    player2 = prompt("Enter name for Player2", "Player2");
-    mode = "";
-  } else {
+function startTheGame() {
+  $("#game-box").css("display", "flex");
+  if (!multiPlayer) {
     player2 = "Computer";
+    player2_symbol =
+      allowedSymbols[Math.floor(Math.random() * allowedSymbols.length)];
     mode = "computer";
   }
+  document.getElementById("player1Icon").innerHTML = player1_symbol;
+  document.getElementById("player2Icon").innerHTML = player2_symbol;
+  turn = player1_symbol;
   isgameOver = false;
   draw = 0;
   startTime = new Date();
@@ -213,6 +275,7 @@ function askplayername(secondplayer) {
 }
 
 let boxes = document.getElementsByClassName("boxes");
+const compTurn = throttleFunction(300);
 // stroing the grid boxes and adding click event on each of them
 Array.from(boxes).forEach((element) => {
   let boxtext = element.querySelector(".boxtext");
@@ -231,10 +294,22 @@ Array.from(boxes).forEach((element) => {
           numberOfTimesClicked < 8 &&
           isgameOver != true
         ) {
-          ComputersTurn();
-          turn = changeTurn();
+          compTurn();
         }
       }
     }
   });
 });
+
+function throttleFunction(time) {
+  timeout = null;
+  return () => {
+    if (!timeout) {
+      timeout = setTimeout(() => {
+        ComputersTurn();
+        turn = changeTurn();
+        timeout = null;
+      }, time);
+    }
+  }
+}

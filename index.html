@@ -20,10 +20,39 @@
         <h4 id="todayDate"></h4>
     </header>
     <div class="gameModes">
-        <button id="plavermode" class="mode-button" onclick="askplayername(true)">Player VS Player</button>
-        <button id="computermode" class="mode-button" onclick="askplayername(false)">Player VS Computer</button>
+        <button id="plavermode" class="mode-button" onclick="askGameType(true)">Player VS Player</button>
+        <button id="computermode" class="mode-button" onclick="askGameType(false)">Player VS Computer</button>
     </div>
-    <div class="container">
+        <form id="player1-info" class="container text-center" onsubmit="player1Details(event)">
+            <div class="row my-3">
+                <div class="col">
+                  <input type="text" class="form-control" id="player1-name" placeholder="Player1 name" aria-label="Player1 name" required>
+                </div>
+                <select class="form-select col" id="player1-icon" aria-label="Default select example">
+                    <option value="!">!</option>
+                    <option value="@">@</option>
+                    <option selected value="X">X</option>
+                    <option value="O">O</option>
+                    <option value="&">&</option>
+                    <option value="%">%</option>
+                    <option value="#">#</option>
+                    <option value="$">$</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <form id="player2-info" class="container text-center" onsubmit="player2Details(event)">
+            <div class="row my-3">
+                <div class="col">
+                  <input type="text" class="form-control" id="player2-name" placeholder="Player2 name" aria-label="Player2 name" required>
+                </div>
+                <select class="form-select col" id="player2-icon" aria-label="Default select example">
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    <div id="game-box" class="container">
         <div id="tic-tac-toe-conatiner">
             <div class="box">
                 <div class="row">
@@ -46,8 +75,8 @@
             
             <div class="turnfor mx-5">
                 <h5>Turn For</h5>
-                <div id="x-turn" class="whosTurn turn-border">X - <span  class="playername playername1"></span></div>
-                <div id="o-turn" class="whosTurn">O - <span  class=" playername playername2"></span></div>
+                <div id="x-turn" class="whosTurn turn-border"><span id="player1Icon"></span> - <span  class="playername playername1"></span></div>
+                <div id="o-turn" class="whosTurn"><span id="player2Icon"></span> - <span  class=" playername playername2"></span></div>
             </div>
         </div>
         <div id="declaringResults" class="text-center">
@@ -56,26 +85,18 @@
             <button class="btn btn-info text-light" onclick="readyToPlay()"> Play Again</button>
         </div>
         <div id="scorecard">
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th id="" class="playername playername1" scope="col">Player1</th>
-                    <th id="" class="playername playername2" scope="col">Player2</th>
-                    <th id="scorecarddraw" class="playername" scope="col">Draw</th>
-                    <th  class="playername" scope="col">Total Games</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <tr >
-                        <th id="total1" class="text-center"></th>
-                        <th id="total2" class="text-center"></th>
-                        <th id="draw" class="text-center"></th>
-                        <th id="toalgames" class="text-center"></th>
-                    </tr>
-                </tbody>
-              </table>
-
-
+            <ul class="bar-chart">
+                <li id="" class="playername text-center playername1" scope="col">Player1</li>
+                <li id="" class="playername text-center playername2" scope="col">Player2</li>
+                <li id="scorecarddraw" class="playername text-center" scope="col">Draw</li>
+                <li class="playername text-center" scope="col">Total Games</li>
+            </ul>
+            <ul class="bar-chart graph">
+                <li id="total1" class="text-center each-bar"></li>
+                <li id="total2" class="text-center each-bar"></li>
+                <li id="draw" class="text-center each-bar"></li>
+                <li id="toalgames" class="text-center"></li>
+            </ul>
         </div>
         <div id="stats">
             <h3 class="text-center">Scoreboard</h3>
@@ -93,8 +114,6 @@
               </table>
         </div>
     </div>
-    <!-- <img src="./assets/winner.gif"> -->
-
 
 </body>
 <script
@@ -104,6 +123,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
     crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <script src="script.js"></script>
 
 </html>
