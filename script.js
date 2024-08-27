@@ -14,6 +14,7 @@ var draw = 0;
 var startTime = 0;
 var endTime = 0;
 var isgameOver = false;
+const totalNumberOfGames = 10;
 var myboxes = document.getElementsByClassName("boxes");
 // Storing all the grid boxes for further evaluation
 const playerTurn = new Audio("./assets/playerTurn.mp3");
@@ -51,14 +52,7 @@ function showWinnerModal(msg, imagepath) {
     document.getElementById("tic-tac-toe-conatiner").style.display = "none";
     document.getElementById("declaringResults").style.display = "block";
     document.getElementById("declareWinnerName").innerText = msg;
-    if (score1 >= 6 || score2 >= 6) {
-      if (score1 > score2) {
-        alert(player1 + "is the Winner");
-      } else {
-        alert(player2 + "is the Winner");
-      }
-      location.reload();
-    } else if (gamePlayedCount >= 10) {
+    if (gamePlayedCount >= totalNumberOfGames) {
       if (score1 > score2) {
         alert(player1 + "is the Winner");
       } else if (score1 < score2) {
@@ -113,11 +107,11 @@ function updateScores(player1Points, player2Points, timeTaken1) {
   }
   // taking the sum of each row in the scorecard so that it could be displayed in the points table
   document.getElementById("total1").innerHTML = score1;
-  document.getElementById("total1").style.height = (score1 / 10) * 100 + "%";
+  document.getElementById("total1").style.height = (score1 / totalNumberOfGames) * 100 + "%";
   document.getElementById("total2").innerHTML = score2;
-  document.getElementById("total2").style.height = (score2 / 10) * 100 + "%";
+  document.getElementById("total2").style.height = (score2 / totalNumberOfGames) * 100 + "%";
   document.getElementById("draw").innerHTML = draw;
-  document.getElementById("draw").style.height = (draw / 10) * 100 + "%";
+  document.getElementById("draw").style.height = (draw / totalNumberOfGames) * 100 + "%";
   document.getElementById("toalgames").innerHTML = draw + score1 + score2;
 }
 
